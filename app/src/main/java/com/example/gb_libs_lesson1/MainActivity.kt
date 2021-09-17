@@ -2,12 +2,15 @@ package com.example.gb_libs_lesson1
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import com.example.gb_libs_lesson1.databinding.ActivityMainBinding
+import moxy.MvpAppCompatActivity
+import moxy.ktx.moxyPresenter
 
-class MainActivity : AppCompatActivity(), MainView {
+class MainActivity : MvpAppCompatActivity(), MainView {
 
-    private val presenter = MainPresenter(this, CountersModel())
+    private val presenter by moxyPresenter {
+        MainPresenter(CountersModel())
+    }
 
     private var _vb: ActivityMainBinding? = null
 
@@ -39,11 +42,15 @@ class MainActivity : AppCompatActivity(), MainView {
         vb.btnCounter3.setOnClickListener(listener)
     }
 
-    override fun setButtonText(index: Int, text: String) {
-        when (index) {
-            0 -> vb.btnCounter1.text = text
-            1 -> vb.btnCounter2.text = text
-            2 -> vb.btnCounter3.text = text
-        }
+    override fun setButton1Text(text: String) {
+        vb.btnCounter1.text = text
+    }
+
+    override fun setButton2Text(text: String) {
+        vb.btnCounter2.text = text
+    }
+
+    override fun setButton3Text(text: String) {
+        vb.btnCounter3.text = text
     }
 }
