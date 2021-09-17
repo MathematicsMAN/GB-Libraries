@@ -3,6 +3,7 @@
     package="com.example.gb_libs_lesson1">
 
     <application
+        android:name="com.example.gb_libs.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GBLibrariesLesson1">
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.gb_libs.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.GBLibrariesLesson1.NoActionBar">
