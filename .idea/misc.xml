@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.247451343836886" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/fragment_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_users.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_user.xml" value="0.33" />
       </map>
@@ -15,5 +16,8 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="SuppressKotlinCodeStyleNotification">
+    <option name="disableForAll" value="true" />
   </component>
 </project>
