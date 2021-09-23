@@ -4,7 +4,6 @@ import com.example.gb_libs.model.GitHubUser
 import com.example.gb_libs.model.GitHubUsersRepo
 import com.example.gb_libs.screens.AndroidScreens
 import com.example.gb_libs.view.UserItemView
-import com.example.gb_libs.view.ui.UsersFragment
 import com.example.gb_libs.view.ui.UsersView
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
@@ -36,9 +35,7 @@ class UsersPresenter(
         loadData()
 
         usersListPresenter.itemClickListener = { itemView ->
-            val screen = AndroidScreens.UserScreen().apply {
-                fragment.arguments?.putParcelable(UsersFragment.KEY_ARG, usersListPresenter.users[itemView.pos])
-            }
+            val screen = AndroidScreens.UserScreen(usersListPresenter.users[itemView.pos])
             router.navigateTo(screen)
         }
     }
