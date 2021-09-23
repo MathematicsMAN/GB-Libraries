@@ -34,7 +34,7 @@ class UserFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val gitUser = arguments?.getParcelable<GitHubUser>(KEY_USER_GITHUB)
-        vb?.userName?.text = "$gitUser test userName"
+        vb?.userName?.text = gitUser?.login
     }
 
     override fun init() {
@@ -51,11 +51,12 @@ class UserFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
     }
 
     companion object {
-        fun newInstance(s: String): UserFragment {
+        fun newInstance(user: GitHubUser): UserFragment {
             return UserFragment().apply {
-                arguments = bundleOf(Pair(KEY_USER_GITHUB, s))
+                arguments = bundleOf(Pair(KEY_USER_GITHUB, user))
             }
         }
+
         const val KEY_USER_GITHUB = "USER_GIT"
     }
 }
