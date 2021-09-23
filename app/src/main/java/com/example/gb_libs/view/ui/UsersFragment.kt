@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gb_libs.App
 import com.example.gb_libs.model.GitHubUsersRepo
@@ -40,13 +38,6 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     override fun init() {
         vb?.rvUsers?.layoutManager = LinearLayoutManager(requireContext())
         vb?.rvUsers?.adapter = adapter
-
-        Toast.makeText(
-            requireContext(),
-            requireArguments().getString(KEY_ARG),
-//            "Test message",
-            Toast.LENGTH_SHORT
-        ).show()
     }
 
     override fun updateList() {
@@ -62,13 +53,4 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         return presenter.backPressed()
     }
 
-    companion object {
-        fun newInstance(s: String): UsersFragment {
-            return UsersFragment().apply {
-                arguments = bundleOf(KEY_ARG to s)
-            }
-        }
-
-        const val KEY_ARG = "USER_INFO"
-    }
 }
