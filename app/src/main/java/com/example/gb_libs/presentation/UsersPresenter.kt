@@ -1,11 +1,14 @@
 package com.example.gb_libs.presentation
 
+import android.util.Log
 import com.example.gb_libs.model.GitHubUser
 import com.example.gb_libs.model.GitHubUsersRepo
 import com.example.gb_libs.screens.AndroidScreens
 import com.example.gb_libs.view.UserItemView
 import com.example.gb_libs.view.ui.UserFragment
 import com.example.gb_libs.view.ui.UsersView
+import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.disposables.Disposable
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 
@@ -44,8 +47,33 @@ class UsersPresenter(
         }
     }
 
+    private val TAG = "UsersObserve"
+    private val users: MutableList<GitHubUser> = mutableListOf()
+
     fun loadData() {
-        val users = usersRepo.getUsers()
+        val userObserver = object : Observer<GitHubUser> {
+            override fun onSubscribe(d: Disposable) {
+                Log.d(TAG, "onSubscribe")
+            }
+
+            override fun onNext(user: GitHubUser) {
+                Log.d(TAG, "onNext: ${user.login}")
+                users.add(user)
+            }
+
+            override fun onError(e: Throwable) {
+                Log.d(TAG, "onError")
+            }
+
+            override fun onComplete() {
+                Log.d(TAG, "onComplete")
+            }
+
+        }
+
+        usersRepo.getUsers()
+            .subscribe(userObserver)
+
         usersListPresenter.users.addAll(users)
         viewState.updateList()
     }
