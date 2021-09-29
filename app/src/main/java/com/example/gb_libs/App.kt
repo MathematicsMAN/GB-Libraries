@@ -1,8 +1,10 @@
 package com.example.gb_libs
 
 import android.app.Application
+import com.example.gb_libs_lesson1.BuildConfig
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
+import timber.log.Timber
 
 class App : Application() {
     private val cicerone: Cicerone<Router> by lazy {
@@ -14,6 +16,10 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
 
     companion object {

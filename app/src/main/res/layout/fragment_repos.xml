@@ -7,8 +7,8 @@
     android:orientation="vertical"
     tools:context="com.example.gb_libs.ui.activity.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/container"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRepos"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
