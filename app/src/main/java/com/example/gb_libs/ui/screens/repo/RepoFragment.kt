@@ -32,7 +32,7 @@ class RepoFragment : MvpAppCompatFragment(), RepoView, BackButtonListener {
         super.onViewCreated(view, savedInstanceState)
         val gitRepo = arguments?.getParcelable<GitHubRepo>(KEY_REPO_ARG)
         vb?.tvRepoName?.text = "Repo name:  ${gitRepo?.name}"
-        vb?.tvRepoId?.text = "Repo id:    ${gitRepo?.id.toString()}"
+        vb?.tvRepoId?.text = "Repo id:    ${gitRepo?.id}"
         vb?.tvRepoForks?.text = "Repo forks: ${gitRepo?.forksCount}"
     }
 

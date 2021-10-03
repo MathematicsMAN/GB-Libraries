@@ -1,6 +1,7 @@
 package com.example.gb_libs
 
 import android.app.Application
+import com.example.gb_libs.data.db.GitHubDatabase
 import com.example.gb_libs_lesson1.BuildConfig
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
@@ -20,6 +21,8 @@ class App : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+
+        GitHubDatabase.create(this)
     }
 
     companion object {

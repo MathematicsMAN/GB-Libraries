@@ -2,8 +2,10 @@ package com.example.gb_libs.ui.screens.repos
 
 import com.example.gb_libs.data.GitHubRepo
 import com.example.gb_libs.data.GitHubReposRepo
+import com.example.gb_libs.data.GitHubUser
 import com.example.gb_libs.navigation.AndroidScreens
 import com.example.gb_libs.ui.items.IRepoListPresenter
+import com.example.gb_libs.ui.screens.repo.RepoFragment
 import com.example.gb_libs.ui.screens.repos.adapter.RepoItemView
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -36,7 +38,7 @@ class ReposPresenter(
         super.onFirstViewAttach()
 
         viewState.init()
-        loadData()
+        loadData(ReposFragment.user)
 
         reposListPresenter.itemClickListener = { itemView ->
             val screen = AndroidScreens.RepoScreen(
@@ -46,8 +48,8 @@ class ReposPresenter(
         }
     }
 
-    private fun loadData() {
-        reposRepo.getRepos(ReposFragment.urlRepos)
+    private fun loadData(user: GitHubUser) {
+        reposRepo.getRepos(user)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ repos ->
