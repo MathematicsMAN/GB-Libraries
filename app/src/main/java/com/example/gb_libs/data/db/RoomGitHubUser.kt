@@ -9,5 +9,4 @@ data class RoomGitHubUser(
     val login: String,
     val avatar: String,
     val repoUrl: String,
-    val url: String
 )

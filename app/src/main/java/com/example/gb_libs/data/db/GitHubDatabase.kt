@@ -9,7 +9,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
     entities = [RoomGitHubUser::class, RoomGitHubRepository::class],
-    version = 2
+    version = 1
     )
 abstract class GitHubDatabase : RoomDatabase() {
     abstract val userDao: UserDao
@@ -17,7 +17,7 @@ abstract class GitHubDatabase : RoomDatabase() {
 
     companion object {
 
-        val MIGRATION_1_2 = object: Migration(1, 2) {
+        private val MIGRATION_1_2 = object: Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE RoomGitHubUser ADD COLUMN url TEXT DEFAULT '' NOT NULL")
             }
@@ -31,7 +31,7 @@ abstract class GitHubDatabase : RoomDatabase() {
         fun create(context: Context) {
             if (instance == null) {
                 instance = Room.databaseBuilder(context, GitHubDatabase::class.java, DB_NAME)
-                    .addMigrations(MIGRATION_1_2)
+//                    .addMigrations(MIGRATION_1_2)
                     .build()
             }
         }
