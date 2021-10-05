@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import com.example.gb_libs.App
 import com.example.gb_libs.data.GitHubRepo
 import com.example.gb_libs.navigation.BackButtonListener
+import com.example.gb_libs.ui.screens.repos.ReposPresenter
 import com.example.gb_libs_lesson1.databinding.FragmentRepoBinding
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter

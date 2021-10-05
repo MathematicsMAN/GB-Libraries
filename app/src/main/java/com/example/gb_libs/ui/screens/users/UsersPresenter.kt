@@ -1,5 +1,6 @@
 package com.example.gb_libs.ui.screens.users
 
+import com.example.gb_libs.data.GitHubReposRepo
 import com.example.gb_libs.data.GitHubUser
 import com.example.gb_libs.data.GitHubUsersRepo
 import com.example.gb_libs.navigation.AndroidScreens
@@ -10,11 +11,17 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 import timber.log.Timber
+import javax.inject.Inject
 
-class UsersPresenter(
-    private val usersRepo: GitHubUsersRepo,
-    private val router: Router
-) : MvpPresenter<UsersView>() {
+class UsersPresenter : MvpPresenter<UsersView>() {
+    @Inject
+    lateinit var usersRepo: GitHubUsersRepo
+
+    @Inject
+    lateinit var reposRepo: GitHubReposRepo
+
+    @Inject
+    lateinit var router: Router
 
     class UserListPresenter : IUserListPresenter {
 
