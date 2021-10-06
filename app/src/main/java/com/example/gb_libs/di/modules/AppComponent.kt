@@ -2,6 +2,8 @@ package com.example.gb_libs.di.modules
 
 import com.example.gb_libs.ui.activity.MainActivity
 import com.example.gb_libs.ui.activity.MainPresenter
+import com.example.gb_libs.ui.screens.repo.RepoPresenter
+import com.example.gb_libs.ui.screens.repos.ReposPresenter
 import com.example.gb_libs.ui.screens.users.UsersPresenter
 import dagger.Component
 import javax.inject.Singleton
@@ -21,4 +23,6 @@ interface AppComponent {
     fun inject(mainPresenter: MainPresenter)
 
     fun inject(usersPresenter: UsersPresenter)
+    fun inject(repoPresenter: RepoPresenter)
+    fun inject(reposPresenter: ReposPresenter)
 }

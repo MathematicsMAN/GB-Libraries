@@ -18,9 +18,6 @@ class UsersPresenter : MvpPresenter<UsersView>() {
     lateinit var usersRepo: GitHubUsersRepo
 
     @Inject
-    lateinit var reposRepo: GitHubReposRepo
-
-    @Inject
     lateinit var router: Router
 
     class UserListPresenter : IUserListPresenter {

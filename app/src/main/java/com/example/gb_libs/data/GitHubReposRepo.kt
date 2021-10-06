@@ -8,7 +8,7 @@ import com.example.gb_libs.utils.INetworkStatus
 
 class GitHubReposRepo(
     private val networkStatus: INetworkStatus,
-    private val db: GitHubDatabase,
+    val db: GitHubDatabase,
     private val apiHolder: IApiHolder
 ) {
 

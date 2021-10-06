@@ -22,13 +22,9 @@ class ReposFragment : MvpAppCompatFragment(), ReposView, BackButtonListener {
     private var vb: FragmentReposBinding? = null
 
     private val presenter: ReposPresenter by moxyPresenter {
-        ReposPresenter(
-            GitHubReposRepo(
-                AndroidNetworkStatus(requireContext()),
-                GitHubDatabase.getInstance()
-            ),
-            App.instance.router
-        )
+        ReposPresenter().apply {
+            App.instance.appComponent.inject(this)
+        }
     }
 
     private val adapter by lazy {

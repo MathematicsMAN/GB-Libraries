@@ -9,14 +9,19 @@ import com.example.gb_libs.App
 import com.example.gb_libs.data.GitHubRepo
 import com.example.gb_libs.navigation.BackButtonListener
 import com.example.gb_libs.ui.screens.repos.ReposPresenter
+import com.example.gb_libs.ui.screens.users.UsersPresenter
 import com.example.gb_libs_lesson1.databinding.FragmentRepoBinding
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
 class RepoFragment : MvpAppCompatFragment(), RepoView, BackButtonListener {
+
     private var vb: FragmentRepoBinding? = null
+
     private val presenter: RepoPresenter by moxyPresenter {
-        RepoPresenter(App.instance.router)
+        RepoPresenter().apply {
+            App.instance.appComponent.inject(this)
+        }
     }
 
     override fun onCreateView(

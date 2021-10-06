@@ -5,18 +5,21 @@ import com.example.gb_libs.data.GitHubReposRepo
 import com.example.gb_libs.data.GitHubUser
 import com.example.gb_libs.navigation.AndroidScreens
 import com.example.gb_libs.ui.items.IRepoListPresenter
-import com.example.gb_libs.ui.screens.repo.RepoFragment
 import com.example.gb_libs.ui.screens.repos.adapter.RepoItemView
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 import timber.log.Timber
+import javax.inject.Inject
 
-class ReposPresenter(
-    private val reposRepo: GitHubReposRepo,
-    private val router: Router
-) : MvpPresenter<ReposView>() {
+class ReposPresenter : MvpPresenter<ReposView>() {
+
+    @Inject
+    lateinit var reposRepo: GitHubReposRepo
+
+    @Inject
+    lateinit var router: Router
 
     class RepoListPresenter : IRepoListPresenter {
 

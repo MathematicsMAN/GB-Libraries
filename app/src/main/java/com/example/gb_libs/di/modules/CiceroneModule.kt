@@ -10,12 +10,6 @@ import javax.inject.Singleton
 @Module
 class CiceroneModule {
 
-//    private val cicerone: Cicerone<Router> by lazy {
-//        Cicerone.create()
-//    }
-//    val navigationHolder get() = cicerone.navigatorHolder
-//    val router get() = cicerone.router
-
     private val cicerone: Cicerone<Router> = Cicerone.create()
 
     @Provides
