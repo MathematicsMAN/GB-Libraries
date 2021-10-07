@@ -19,9 +19,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     private val navigator = SupportAppNavigator(this, R.id.container)
 
     private val presenter by moxyPresenter {
-        MainPresenter().apply {
-            App.instance.appComponent.inject(this)
-        }
+            App.instance.appComponent.presenter()
     }
 
     private var _vb: ActivityMainBinding? = null

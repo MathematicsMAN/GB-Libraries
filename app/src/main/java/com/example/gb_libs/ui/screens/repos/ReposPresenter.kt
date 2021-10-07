@@ -1,5 +1,6 @@
 package com.example.gb_libs.ui.screens.repos
 
+import com.example.gb_libs.App
 import com.example.gb_libs.data.GitHubRepo
 import com.example.gb_libs.data.GitHubReposRepo
 import com.example.gb_libs.data.GitHubUser
@@ -13,7 +14,9 @@ import ru.terrakok.cicerone.Router
 import timber.log.Timber
 import javax.inject.Inject
 
-class ReposPresenter : MvpPresenter<ReposView>() {
+class ReposPresenter(
+    private val user: GitHubUser
+) : MvpPresenter<ReposView>() {
 
     @Inject
     lateinit var reposRepo: GitHubReposRepo
@@ -41,7 +44,7 @@ class ReposPresenter : MvpPresenter<ReposView>() {
         super.onFirstViewAttach()
 
         viewState.init()
-        loadData(ReposFragment.user)
+        loadData()
 
         reposListPresenter.itemClickListener = { itemView ->
             val screen = AndroidScreens.RepoScreen(
@@ -51,7 +54,7 @@ class ReposPresenter : MvpPresenter<ReposView>() {
         }
     }
 
-    private fun loadData(user: GitHubUser) {
+    private fun loadData() {
         reposRepo.getRepos(user)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -66,5 +69,10 @@ class ReposPresenter : MvpPresenter<ReposView>() {
     fun backPressed(): Boolean {
         router.backTo(AndroidScreens.UsersScreen())
         return true
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        App.instance.releaseRepoScope()
     }
 }

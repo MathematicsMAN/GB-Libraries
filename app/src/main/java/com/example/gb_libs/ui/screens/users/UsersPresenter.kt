@@ -1,6 +1,6 @@
 package com.example.gb_libs.ui.screens.users
 
-import com.example.gb_libs.data.GitHubReposRepo
+import com.example.gb_libs.App
 import com.example.gb_libs.data.GitHubUser
 import com.example.gb_libs.data.GitHubUsersRepo
 import com.example.gb_libs.navigation.AndroidScreens
@@ -66,5 +66,10 @@ class UsersPresenter : MvpPresenter<UsersView>() {
     fun backPressed(): Boolean {
         router.exit()
         return true
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        App.instance.releaseUserScope()
     }
 }

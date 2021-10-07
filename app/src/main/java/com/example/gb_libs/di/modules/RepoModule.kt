@@ -1,41 +1,34 @@
 package com.example.gb_libs.di.modules
 
 import com.example.gb_libs.data.GitHubReposRepo
-import com.example.gb_libs.data.GitHubUsersRepo
+import com.example.gb_libs.data.cache.IRoomGithubRepositoriesCache
+import com.example.gb_libs.data.cache.RoomGithubRepositoriesCache
 import com.example.gb_libs.data.db.GitHubDatabase
+import com.example.gb_libs.di.scopes.RepoScope
 import com.example.gb_libs.remote.IApiHolder
 import com.example.gb_libs.utils.INetworkStatus
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
-class RepoModule {
+open class RepoModule {
 
-    @Singleton
     @Provides
-    fun usersRepo(
-        networkStatus: INetworkStatus,
-        db: GitHubDatabase,
-        apiHolder: IApiHolder
-    ): GitHubUsersRepo {
-        return GitHubUsersRepo(
-            networkStatus = networkStatus,
-            db = db,
-            apiHolder = apiHolder
-        )
+    @RepoScope
+    fun reposCache(db: GitHubDatabase): IRoomGithubRepositoriesCache {
+        return RoomGithubRepositoriesCache(db)
     }
 
-    @Singleton
     @Provides
+    @RepoScope
     fun reposRepo(
         networkStatus: INetworkStatus,
-        db: GitHubDatabase,
+        cache: IRoomGithubRepositoriesCache,
         apiHolder: IApiHolder
     ): GitHubReposRepo {
         return GitHubReposRepo(
             networkStatus = networkStatus,
-            db = db,
+            cacheRepos = cache,
             apiHolder = apiHolder
         )
     }

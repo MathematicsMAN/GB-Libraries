@@ -1,9 +1,11 @@
 package com.example.gb_libs
 
 import android.app.Application
-import com.example.gb_libs.di.modules.AppComponent
+import com.example.gb_libs.di.component.AppComponent
+import com.example.gb_libs.di.component.DaggerAppComponent
+import com.example.gb_libs.di.component.RepoSubcomponent
+import com.example.gb_libs.di.component.UsersSubcomponent
 import com.example.gb_libs.di.modules.AppModule
-import com.example.gb_libs.di.modules.DaggerAppComponent
 import com.github.moxy_community.moxy.androidx.BuildConfig
 import timber.log.Timber
 
@@ -11,13 +13,10 @@ class App : Application() {
 
     lateinit var appComponent: AppComponent
 
-    lateinit var testAppComponent: TestAppComponent
+    var usersSubcomponent: UsersSubcomponent? = null
         private set
 
-    var authorsSubcomponent: AuthorsSubcomponent? = null
-        private set
-
-    var booksSubcomponent: BooksSubcomponent? = null
+    var repoSubcomponent: RepoSubcomponent? = null
         private set
 
     override fun onCreate() {
@@ -33,25 +32,24 @@ class App : Application() {
             .build()
     }
 
-    fun initAuthorsSubcomponent() = testAppComponent.authorsSubcomponent().also {
-        authorsSubcomponent = it
+    fun initUserSubcomponent() = appComponent.userSubcomponent().also {
+        usersSubcomponent = it
     }
 
-    fun destroyAuthorsSubcomponent() {
-        authorsSubcomponent = null
-    }
-
-    fun initBooksSubComponent() = testAppComponent
-        .authorsSubcomponent()
-        .booksSubcomponent()
+    fun initRepoSubcomponent() = appComponent
+        .userSubcomponent()
+        .repositorySubcomponent()
         .also {
-            booksSubcomponent = it
+            repoSubcomponent = it
         }
 
-    fun destroyBooksSubcomponent() {
-        booksSubcomponent = null
+    fun releaseUserScope() {
+        usersSubcomponent = null
     }
 
+    fun releaseRepoScope() {
+        repoSubcomponent = null
+    }
 
     companion object {
         lateinit var instance: App
