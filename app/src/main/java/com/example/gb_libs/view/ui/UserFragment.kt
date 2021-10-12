@@ -49,7 +49,7 @@ class UserFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
     override fun backPressed(): Boolean {
         return presenter.backPressed()
     }
-
+    
     companion object {
         fun newInstance(s: String): UserFragment {
             return UserFragment().apply {

@@ -5,7 +5,6 @@ import com.example.gb_libs.model.GitHubUser
 import com.example.gb_libs.model.GitHubUsersRepo
 import com.example.gb_libs.screens.AndroidScreens
 import com.example.gb_libs.view.UserItemView
-import com.example.gb_libs.view.ui.UserFragment
 import com.example.gb_libs.view.ui.UsersView
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
@@ -39,10 +38,7 @@ class UsersPresenter(
         loadData()
 
         usersListPresenter.itemClickListener = { itemView ->
-            val userGithub = usersListPresenter.users[itemView.pos]
-            val screen = AndroidScreens.UserScreen(userGithub.login).apply {
-                fragment.arguments?.putParcelable(UserFragment.KEY_USER_GITHUB, userGithub)
-            }
+            val screen = AndroidScreens.UserScreen(usersListPresenter.users[itemView.pos])
             router.navigateTo(screen)
         }
     }
