@@ -19,8 +19,6 @@ class ReposFragment : MvpAppCompatFragment(), ReposView, BackButtonListener {
 
     private var vb: FragmentReposBinding? = null
 
-    private val user by initParams<GitHubUser>()
-
     private val presenter: ReposPresenter by moxyPresenter {
         App.instance.initRepoSubcomponent()
         ReposPresenter(user).apply {
@@ -64,11 +62,11 @@ class ReposFragment : MvpAppCompatFragment(), ReposView, BackButtonListener {
 
     companion object {
         private const val KEY_REPOS_ARG = "REPOS"
-// todo       var urlRepos: String? = null
+        lateinit var user: GitHubUser
 
         fun newInstance(user: GitHubUser): ReposFragment {
             return ReposFragment().apply {
-// todo               urlRepos = user.reposUrl
+                this@Companion.user = user
                 arguments = bundleOf(Pair(KEY_REPOS_ARG, user))
             }
         }
