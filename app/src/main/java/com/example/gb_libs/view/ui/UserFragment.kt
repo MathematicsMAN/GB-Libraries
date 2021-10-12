@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import com.example.gb_libs.App
 import com.example.gb_libs.model.GitHubUser
 import com.example.gb_libs.presentation.UserPresenter
@@ -32,8 +33,8 @@ class UserFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val gitUser = arguments?.getParcelable<GitHubUser>(UsersFragment.KEY_ARG)
-        vb?.userName?.text = gitUser?.login + " test userName"
+        val gitUser = arguments?.getParcelable<GitHubUser>(KEY_USER_GITHUB)
+        vb?.userName?.text = "$gitUser test userName"
     }
 
     override fun init() {
@@ -47,5 +48,14 @@ class UserFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
 
     override fun backPressed(): Boolean {
         return presenter.backPressed()
+    }
+    
+    companion object {
+        fun newInstance(s: String): UserFragment {
+            return UserFragment().apply {
+                arguments = bundleOf(Pair(KEY_USER_GITHUB, s))
+            }
+        }
+        const val KEY_USER_GITHUB = "USER_GIT"
     }
 }
